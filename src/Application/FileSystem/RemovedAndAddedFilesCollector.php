@@ -7,8 +7,8 @@ namespace Rector\Core\Application\FileSystem;
 use Rector\Core\ValueObject\Application\File;
 use Rector\Core\ValueObject\Application\MovedFile;
 use Rector\FileSystemRector\Contract\AddedFileInterface;
+use Rector\FileSystemRector\Contract\FileWithNodesInterface;
 use Rector\FileSystemRector\ValueObject\AddedFileWithContent;
-use Rector\FileSystemRector\ValueObject\AddedFileWithNodes;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class RemovedAndAddedFilesCollector
@@ -84,13 +84,13 @@ final class RemovedAndAddedFilesCollector
     }
 
     /**
-     * @return AddedFileWithNodes[]
+     * @return AddedFileInterface[]&FileWIthNodesInterface[]
      */
     public function getAddedFilesWithNodes(): array
     {
         return array_filter(
             $this->addedFiles,
-            fn (AddedFileInterface $addedFile): bool => $addedFile instanceof AddedFileWithNodes
+            fn (AddedFileInterface $addedFile): bool => $addedFile instanceof FileWithNodesInterface
         );
     }
 
